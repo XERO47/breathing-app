@@ -26,11 +26,12 @@ const pixelTheme = createTheme({
     // Custom colors from image
     custom: {
       skyBlue: '#82C3F0',
-      darkPurpleBlue: '#202038',
+      darkPurpleBlue: 'rgb(32, 32, 56)',
       skinTone: '#F8C9B8',
       shirtWhite: '#E0F0FF', // Slightly off-white
       shadowBlue: '#5F8CB0',
-      progressBar: '#FFFFFF'
+      progressBar: '#FFFFFF',
+      
     }
   },
   typography: {

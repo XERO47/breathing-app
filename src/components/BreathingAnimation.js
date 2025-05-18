@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react'; // Removed useCallback, useRef not strictly needed here if passed
+import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import './BreathingAnimation.css';
 
 const VIDEO_FILE_NAME = 'animation.mp4';
 
-// Props expected: videoRef, initialIsMuted, onActualMutedStateChange, onTimeUpdate, onLoadedMetadata
+// Added sessionHasBegun to props
 const BreathingAnimation = ({
   videoRef,
   initialIsMuted,
   onActualMutedStateChange,
-  onTimeUpdate, // New prop from App.js
-  onLoadedMetadata, // New prop from App.js
+  onTimeUpdate,
+  onLoadedMetadata,
+  sessionHasBegun // Optional prop
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  // Removed local progress, durationKnown, and progress bar calculation logic
-
   const videoSrc = `/${VIDEO_FILE_NAME}`;
 
   useEffect(() => {
+    if (!sessionHasBegun) return; // Don't do anything if session hasn't started
+
     const videoElement = videoRef.current;
     if (videoElement) {
       videoElement.muted = initialIsMuted;
@@ -38,37 +39,31 @@ const BreathingAnimation = ({
           });
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoRef, initialIsMuted, onActualMutedStateChange]);
-
+  }, [videoRef, initialIsMuted, onActualMutedStateChange, sessionHasBegun]); // Added sessionHasBegun to dependencies
 
   return (
-    // This Box is now just for the video element's immediate container within the blue frame
-    // The className "animation-video-container-relative" might not be needed here anymore if progress bars are outside
     <Box
       sx={{
         width: '100%',
-        height: '100%', // Ensure it fills the blue frame from App.js
-        display: 'flex', // To center video if it's letterboxed
+        height: '100%',
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
       <video
         ref={videoRef}
-        className="breathing-video" // From BreathingAnimation.css - mostly for width/height/borderRadius of video
+        className="breathing-video"
         src={videoSrc}
         loop
         playsInline
-        onTimeUpdate={onTimeUpdate} // Use callback from App.js
-        onLoadedMetadata={onLoadedMetadata} // Use callback from App.js
+        onTimeUpdate={onTimeUpdate}
+        onLoadedMetadata={onLoadedMetadata}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
       >
         Your browser does not support the video tag.
       </video>
-
-      {/* Progress Bar Elements have been MOVED to App.js */}
     </Box>
   );
 };
