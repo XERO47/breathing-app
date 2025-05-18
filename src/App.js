@@ -305,7 +305,7 @@ function App() {
             textAlign: 'center', gap: { xs: '20px', sm: '24px' }, width: '100%',
           }}
         >
-          <Typography
+          {/* <Typography
             variant="h4"
             component="h1"
             sx={(theme) => ({
@@ -314,7 +314,7 @@ function App() {
             })}
           >
             Breathe Deeply
-          </Typography>
+          </Typography> */}
 
           <Box sx={{ height: '40px', display: 'flex', alignItems: 'center' }}>
             <Fade in={showInstruction} timeout={500}>
