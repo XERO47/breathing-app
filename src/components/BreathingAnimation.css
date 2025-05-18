@@ -1,0 +1,25 @@
+/* src/components/BreathingAnimation.css */
+.animation-container { /* This class might not be directly used on a styled Box anymore */
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  box-shadow: none; */
+}
+
+.breathing-video {
+  width: 100%; /* Make video take full width of its container in BreathingAnimation.js */
+  height: 100%; /* Make video take full height */
+  object-fit: cover; /* Or 'contain', depending on desired video scaling */
+  border-radius: 8px; /* Optional: if you want the video ITSELF to have slightly rounded corners inside the blue frame */
+  outline: none;
+  display: block;
+  box-shadow: none;
+}
+
+/* Style for the text below the video, if any (not currently used) */
+.animation-text {
+  /* margin-top: 16px;
+  font-size: 0.9rem; */
+}
